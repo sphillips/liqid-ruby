@@ -1,4 +1,8 @@
 # Liqid Coding Challenge
+## To Run Example
+API key will default to my test key. Run on command line:
+`ruby fetch_stock_data.rb 'AAPL' '2018-03-11' '2018-03-15'`
+
 ## Requirements
 - The application should get following inputs
   - A stock symbol e.g. “AAPL”

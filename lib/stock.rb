@@ -1,5 +1,6 @@
 gem 'rest-client'
 require 'rest-client'
+require 'JSON'
 
 class Stock
   TEST_API_KEY = 'V6qs6uyJLD-MDrz85au4'
@@ -23,8 +24,8 @@ class Stock
   end
 
   def parse_quandl_data
-    # response = request(quandl_stock_time_data_url)
-    response = test_request
+    # response = test_request
+    response = request(quandl_stock_time_data_url)
     response['dataset']['data'].each do |price_data|
       puts "#{price_data[0]}: Closed at #{price_data[1].round(2)}"
     end
@@ -56,6 +57,3 @@ class Stock
     !api_key.nil? && !stock_symbol.nil? && !start_date.nil? && !end_date.nil?
   end
 end
-
-stock = Stock.new(ARGV)
-print stock.parse_quandl_data
