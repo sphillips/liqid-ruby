@@ -15,25 +15,40 @@ class Stock
     @end_date = args[:end_date]
   end
 
-  def quandl_stock_time_data_url
-    "#{BASE_URL_QUANDL}#{stock_symbol}.json?column_index=1&start_date=#{start_date}&end_date=#{end_date}&api_key=#{api_key}"
-  end
-
   def output_stock_data
-    #code
+    stock_data = fetch_stock_data
+    print_closing_prices(stock_data)
+    print_drawdowns(stock_data)
+    print_maximum_drawdown(stock_data)
+    print_rate_of_return(stock_data)
   end
 
-  def parse_quandl_data
-    # response = test_request
-    response = request(quandl_stock_time_data_url)
-    response['dataset']['data'].each do |price_data|
+  def print_closing_prices(stock_data)
+    stock_data.each do |price_data|
       puts "#{price_data[0]}: Closed at #{price_data[1].round(2)}"
     end
   end
 
-  def request_stock_data
+  def print_drawdowns(stock_data)
+    puts "First 3 Drawdowns:\n"
+  end
+
+  def print_maximum_drawdown(stock_data)
+    puts "Maximum Drawdown: "
+  end
+
+  def print_rate_of_return(stock_data)
+    puts "Return: "
+  end
+
+  def quandl_stock_time_data_url
+    "#{BASE_URL_QUANDL}#{stock_symbol}.json?column_index=1&start_date=#{start_date}&end_date=#{end_date}&api_key=#{api_key}"
+  end
+
+  def fetch_stock_data
     verify_params
-    request(quandl_stock_time_data_url)
+    response = request(quandl_stock_time_data_url)
+    response['dataset']['data']
   end
 
   def request(url)
