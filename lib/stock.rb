@@ -30,7 +30,7 @@ class Stock
   def print_closing_prices(stock_data)
     puts "\n"
     stock_data.each do |price_data|
-      puts "#{price_data[0]}: Closed at #{price_data[1].round(2)}\n"
+      puts "#{price_data[0]}: Closed at #{price_data[4].round(2)}\n"
     end
     puts "\n"
   end
@@ -51,7 +51,7 @@ class Stock
   end
 
   def quandl_stock_time_data_url
-    "#{BASE_URL_QUANDL}#{stock_symbol}.json?column_index=4&start_date=#{start_date}&end_date=#{end_date}&api_key=#{api_key}"
+    "#{BASE_URL_QUANDL}#{stock_symbol}.json?start_date=#{start_date}&end_date=#{end_date}&api_key=#{api_key}"
   end
 
   def fetch_stock_data

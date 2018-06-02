@@ -3,9 +3,9 @@ class ParseStockData
   attr_reader :stock_data, :start_price, :start_date, :end_price, :end_date
   def initialize(stock_data)
     @stock_data = stock_data
-    @start_price = stock_data[stock_data.length - 1][1]
+    @start_price = stock_data[stock_data.length - 1][4]
     @start_date = stock_data[stock_data.length - 1][0]
-    @end_price = stock_data[0][1]
+    @end_price = stock_data[0][4]
     @end_date = stock_data[0][0]
   end
 
