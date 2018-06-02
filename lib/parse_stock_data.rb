@@ -28,7 +28,7 @@ class ParseStockData
 
   def print_rate_of_return
     ror = (earnings) / start_price
-    output = format_ror_data(earnings, ror)
+    format_ror_data(earnings, ror)
   end
 
   private
