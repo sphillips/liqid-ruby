@@ -1,4 +1,7 @@
+require_relative 'helpers/dates_helper'
+
 class ParseStockData
+  include DatesHelper
 
   attr_reader :stock_data, :start_price, :start_date, :end_price, :end_date
   def initialize(stock_data)
@@ -12,17 +15,17 @@ class ParseStockData
   def closing_prices
     puts "\n"
     stock_data.each do |price_data|
-      puts "#{format_date(price_data[0])}: Closed at #{price_data[4].round(2)}\n"
+      puts print_closing_data(price_data)
     end
     puts "\n"
   end
 
   def drawdowns
     drawdowns = calculate_drawdowns
-    max_drawdown = drawdowns.max_by { |d| d[:amount].abs }
     puts "First 3 Drawdowns:\n"
-    drawdowns.each { |drawdown| puts parse_drawdown_data(drawdown) }
-    puts "Max Drawdown: #{parse_drawdown_data(max_drawdown)}"
+    drawdowns.each { |drawdown| puts print_drawdown_data(drawdown) }
+    max_drawdown = drawdowns.max_by { |d| d[:amount].abs }
+    puts "Max Drawdown: #{print_drawdown_data(max_drawdown)}"
   end
 
   def rate_of_return
@@ -31,11 +34,6 @@ class ParseStockData
   end
 
   private
-
-  def format_date(date_string)
-    date = Date.parse(date_string)
-    date.strftime("%d.%m.%y")
-  end
 
   def format_ror(ror)
     (ror * 100).round(1)
@@ -65,7 +63,11 @@ class ParseStockData
     drawdowns
   end
 
-  def parse_drawdown_data(drawdown)
+  def print_closing_data(price_data)
+    "#{format_date(price_data[0])}: Closed at #{price_data[4].round(2)}\n"
+  end
+
+  def print_drawdown_data(drawdown)
     "#{drawdown[:amount]}% (#{drawdown[:high_price]} on #{drawdown[:date]} -> #{drawdown[:low_price]} on #{drawdown[:date]})\n"
   end
 end
