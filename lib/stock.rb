@@ -1,6 +1,6 @@
 gem 'rest-client'
 require 'rest-client'
-require 'JSON'
+require 'json'
 require_relative 'parse_stock_data'
 
 class Stock
@@ -25,19 +25,21 @@ class Stock
   end
 
   def print_closing_prices(stock_data)
+    puts "\n"
     stock_data.each do |price_data|
-      puts "#{price_data[0]}: Closed at #{price_data[1].round(2)}"
+      puts "#{price_data[0]}: Closed at #{price_data[1].round(2)}\n"
     end
+    puts "\n"
   end
 
   def print_drawdowns(stock_data)
     drawdowns = ParseStockData.new(stock_data).drawdowns
-    puts "First 3 Drawdowns:\n#{drawdowns}"
+    puts "First 3 Drawdowns:\n#{drawdowns}\n"
   end
 
   def print_maximum_drawdown(stock_data)
     max_drawdown = ParseStockData.new(stock_data).max_drawdown
-    puts "Maximum Drawdown: #{max_drawdown}"
+    puts "Maximum Drawdown: #{max_drawdown}\n"
   end
 
   def print_rate_of_return(stock_data)
