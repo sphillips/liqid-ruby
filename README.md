@@ -2,7 +2,14 @@
 ## To Run Example
 Run from the command line in root folder, providing your API key as an ENV variable. The API key will default to a test key if not provided:
 
-`API_KEY=XXX ruby fetch_stock.rb AAPL 2018-01-01 2018-01-05`
+`$ API_KEY=XXX ruby fetch_stock.rb AAPL 2018-01-01 2018-01-05`
+
+## To Run Specs
+Simply run the `rspec` command from the root folder:
+
+`$ rspec`
+
+The [VCR](https://github.com/vcr/vcr) gem is used to record the API response and speed up the test suite.
 
 ## Requirements
 - The application should get following inputs

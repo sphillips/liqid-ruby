@@ -11,8 +11,8 @@ class Stock
   def output_stock_data
     stock_data = FetchStockData.new(args).fetch
     parsed_stock_data = ParseStockData.new(stock_data)
-    parsed_stock_data.print_closing_prices
-    parsed_stock_data.print_drawdowns
-    parsed_stock_data.print_rate_of_return
+    puts parsed_stock_data.print_closing_prices
+    puts parsed_stock_data.print_drawdowns
+    puts parsed_stock_data.print_rate_of_return
   end
 end

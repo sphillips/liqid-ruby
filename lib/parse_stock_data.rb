@@ -13,22 +13,22 @@ class ParseStockData
   end
 
   def print_closing_prices
-    puts "\n"
-    stock_data.each { |price_data| puts format_closing_data(price_data) }
-    puts "\n"
+    output = "\n"
+    stock_data.each { |price_data| output += format_closing_data(price_data) }
+    output += "\n"
   end
 
   def print_drawdowns
     drawdowns = calculate_drawdowns
-    puts "First 3 Drawdowns:\n"
-    drawdowns.each { |drawdown| puts format_drawdown_data(drawdown) }
+    output = "First 3 Drawdowns:\n"
+    drawdowns.each { |drawdown| output += format_drawdown_data(drawdown) }
     max_drawdown = drawdowns.max_by { |d| d[:amount].abs }
-    puts "Max Drawdown: #{format_drawdown_data(max_drawdown)}"
+    output += "Max Drawdown: #{format_drawdown_data(max_drawdown)}"
   end
 
   def print_rate_of_return
     ror = (earnings) / start_price
-    puts format_ror_data(earnings, ror)
+    output = format_ror_data(earnings, ror)
   end
 
   private
