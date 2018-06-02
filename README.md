@@ -1,8 +1,8 @@
 # Liqid Coding Challenge
 ## To Run Example
-API key will default to my test key. Run from command line in root folder:
+Run from the command line in root folder. API key will default to a test key if not provided:
 
-`ruby fetch_stock_data.rb AAPL 2018-03-11 2018-03-15`
+`API_KEY=XXX ruby fetch_stock.rb AAPL 2018-03-11 2018-03-15`
 
 ## Requirements
 - The application should get following inputs
