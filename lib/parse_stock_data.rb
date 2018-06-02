@@ -22,7 +22,7 @@ class ParseStockData
     drawdowns = calculate_drawdowns
     output = "First 3 Drawdowns:\n"
     drawdowns.each { |drawdown| output += format_drawdown_data(drawdown) }
-    max_drawdown = drawdowns.max_by { |d| d[:amount].abs }
+    max_drawdown = drawdowns.min_by { |d| d[:amount] }
     output += "Max Drawdown: #{format_drawdown_data(max_drawdown)}\n"
   end
 
