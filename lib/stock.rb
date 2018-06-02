@@ -23,31 +23,19 @@ class Stock
     stock_data = fetch_stock_data
     print_closing_prices(stock_data)
     print_drawdowns(stock_data)
-    print_maximum_drawdown(stock_data)
     print_rate_of_return(stock_data)
   end
 
   def print_closing_prices(stock_data)
-    puts "\n"
-    stock_data.each do |price_data|
-      puts "#{price_data[0]}: Closed at #{price_data[4].round(2)}\n"
-    end
-    puts "\n"
+    ParseStockData.new(stock_data).closing_prices
   end
 
   def print_drawdowns(stock_data)
-    drawdowns = ParseStockData.new(stock_data).drawdowns
-    puts "First 3 Drawdowns:\n#{drawdowns}\n"
-  end
-
-  def print_maximum_drawdown(stock_data)
-    max_drawdown = ParseStockData.new(stock_data).max_drawdown
-    puts "Maximum Drawdown: #{max_drawdown}\n"
+    ParseStockData.new(stock_data).drawdowns
   end
 
   def print_rate_of_return(stock_data)
-    ror = ParseStockData.new(stock_data).rate_of_return
-    puts "Return: #{ror}"
+    ParseStockData.new(stock_data).rate_of_return
   end
 
   def quandl_stock_time_data_url
