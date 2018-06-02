@@ -1,6 +1,7 @@
 gem 'rest-client'
 require 'rest-client'
 require 'JSON'
+require_relative 'parse_stock_data'
 
 class Stock
   TEST_API_KEY = 'V6qs6uyJLD-MDrz85au4'
@@ -30,15 +31,18 @@ class Stock
   end
 
   def print_drawdowns(stock_data)
-    puts "First 3 Drawdowns:\n"
+    drawdowns = ParseStockData.new(stock_data).drawdowns
+    puts "First 3 Drawdowns:\n#{drawdowns}"
   end
 
   def print_maximum_drawdown(stock_data)
-    puts "Maximum Drawdown: "
+    max_drawdown = ParseStockData.new(stock_data).max_drawdown
+    puts "Maximum Drawdown: #{max_drawdown}"
   end
 
   def print_rate_of_return(stock_data)
-    puts "Return: "
+    ror = ParseStockData.new(stock_data).rate_of_return
+    puts "Return: #{ror}"
   end
 
   def quandl_stock_time_data_url
