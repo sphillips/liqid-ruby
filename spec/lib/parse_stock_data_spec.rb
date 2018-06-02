@@ -7,14 +7,14 @@ describe ParseStockData do
     ["2018-01-03", 172.53, 174.55, 171.96, 172.23, 28819653.0, 0.0, 1.0, 172.53, 174.55, 171.96, 172.23, 28819653.0]
   ]
 
-  let!(:parse_data) { ParseStockData.new(stock_data)}
+  let(:parse_data) { ParseStockData.new(stock_data)}
 
   it "formats closing prices correctly" do
     expect(parse_data.print_closing_prices).to eq("\n02.01.18: Closed at 172.26 (169.26 ~ 172.3)\n03.01.18: Closed at 172.23 (171.96 ~ 174.55)\n\n")
   end
 
   it "formats drawdowns correctly" do
-    expect(parse_data.print_drawdowns).to eq("First 3 Drawdowns:\n-1.8% (172.3 on 02.01.18 -> 169.26 on 02.01.18)\n-1.5% (174.55 on 03.01.18 -> 171.96 on 03.01.18)\nMax Drawdown: -1.8% (172.3 on 02.01.18 -> 169.26 on 02.01.18)\n")
+    expect(parse_data.print_drawdowns).to eq("First 3 Drawdowns:\n-1.8% (172.3 on 02.01.18 -> 169.26 on 02.01.18)\n-1.5% (174.55 on 03.01.18 -> 171.96 on 03.01.18)\nMax Drawdown: -1.8% (172.3 on 02.01.18 -> 169.26 on 02.01.18)\n\n")
   end
 
   it "formats rate of return correctly" do

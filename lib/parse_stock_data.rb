@@ -23,7 +23,7 @@ class ParseStockData
     output = "First 3 Drawdowns:\n"
     drawdowns.each { |drawdown| output += format_drawdown_data(drawdown) }
     max_drawdown = drawdowns.max_by { |d| d[:amount].abs }
-    output += "Max Drawdown: #{format_drawdown_data(max_drawdown)}"
+    output += "Max Drawdown: #{format_drawdown_data(max_drawdown)}\n"
   end
 
   def print_rate_of_return
