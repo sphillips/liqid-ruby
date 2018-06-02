@@ -1,6 +1,6 @@
 # Liqid Coding Challenge
 ## To Run Example
-Run from the command line in root folder, providing your API key as an ENV variable. The API key will default to a test key if not provided:
+Run the `fetch_stock.rb` script from the command line in the root folder, providing your API key as an ENV variable. If no API key is provided, the script will default to a test key:
 
 ```
 $ API_KEY=XXX ruby fetch_stock.rb AAPL 2018-01-01 2018-01-05
