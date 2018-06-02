@@ -1,8 +1,12 @@
 class ParseStockData
 
-  attr_reader :stock_data
+  attr_reader :stock_data, :start_price, :start_date, :end_price, :end_date
   def initialize(stock_data)
     @stock_data = stock_data
+    @start_price = stock_data[stock_data.length - 1][1]
+    @start_date = stock_data[stock_data.length - 1][0]
+    @end_price = stock_data[0][1]
+    @end_date = stock_data[0][0]
   end
 
   def drawdowns
@@ -14,6 +18,14 @@ class ParseStockData
   end
 
   def rate_of_return
-    "2.740000000000009 [+1.6%] (172.26 on 02.01.18 -> 175.0 on 05.01.18)"
+    earnings = end_price - start_price
+    ror = (earnings) / start_price
+    "#{earnings} [#{format_ror(ror)}%] (#{start_price} on #{start_date} -> #{end_price} on #{end_date})"
+  end
+
+  private
+
+  def format_ror(ror)
+    (ror * 100).round(1)
   end
 end
