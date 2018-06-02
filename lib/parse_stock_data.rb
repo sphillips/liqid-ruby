@@ -12,30 +12,28 @@ class ParseStockData
     @end_date = stock_data[stock_data.length - 1][0]
   end
 
-  def closing_prices
+  def print_closing_prices
     puts "\n"
-    stock_data.each do |price_data|
-      puts print_closing_data(price_data)
-    end
+    stock_data.each { |price_data| puts format_closing_data(price_data) }
     puts "\n"
   end
 
-  def drawdowns
+  def print_drawdowns
     drawdowns = calculate_drawdowns
     puts "First 3 Drawdowns:\n"
-    drawdowns.each { |drawdown| puts print_drawdown_data(drawdown) }
+    drawdowns.each { |drawdown| puts format_drawdown_data(drawdown) }
     max_drawdown = drawdowns.max_by { |d| d[:amount].abs }
-    puts "Max Drawdown: #{print_drawdown_data(max_drawdown)}"
+    puts "Max Drawdown: #{format_drawdown_data(max_drawdown)}"
   end
 
-  def rate_of_return
+  def print_rate_of_return
     ror = (earnings) / start_price
-    puts print_ror(earnings, ror)
+    puts format_ror_data(earnings, ror)
   end
 
   private
 
-  def format_ror(ror)
+  def format_ror_value(ror)
     (ror * 100).round(1)
   end
 
@@ -45,7 +43,7 @@ class ParseStockData
 
   def calculate_rate(start_value, end_value)
     amount = (end_value - start_value) / start_value
-    format_ror(amount)
+    format_ror_value(amount)
   end
 
   def calculate_drawdowns
@@ -63,16 +61,16 @@ class ParseStockData
     drawdowns
   end
 
-  def print_closing_data(price_data)
+  def format_closing_data(price_data)
     "#{format_date(price_data[0])}: Closed at #{price_data[4].round(2)} (#{price_data[3]} ~ #{price_data[2]})\n"
   end
 
-  def print_drawdown_data(drawdown)
+  def format_drawdown_data(drawdown)
     "#{drawdown[:amount]}% (#{drawdown[:high_price]} on #{drawdown[:date]} -> #{drawdown[:low_price]} on #{drawdown[:date]})\n"
   end
 
-  def print_ror(earnings, ror)
+  def format_ror_data(earnings, ror)
     symbol = ror > 0 ? '+' : ''
-    "Return: #{earnings} [#{symbol}#{format_ror(ror)}%] (#{start_price} on #{format_date(start_date)} -> #{end_price} on #{format_date(end_date)})"
+    "Return: #{earnings} [#{symbol}#{format_ror_value(ror)}%] (#{start_price} on #{format_date(start_date)} -> #{end_price} on #{format_date(end_date)})"
   end
 end

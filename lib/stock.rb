@@ -21,21 +21,10 @@ class Stock
     puts request(quandl_stock_time_data_url)
 
     stock_data = fetch_stock_data
-    print_closing_prices(stock_data)
-    print_drawdowns(stock_data)
-    print_rate_of_return(stock_data)
-  end
-
-  def print_closing_prices(stock_data)
-    ParseStockData.new(stock_data).closing_prices
-  end
-
-  def print_drawdowns(stock_data)
-    ParseStockData.new(stock_data).drawdowns
-  end
-
-  def print_rate_of_return(stock_data)
-    ParseStockData.new(stock_data).rate_of_return
+    parsed_stock_data = ParseStockData.new(stock_data)
+    parsed_stock_data.print_closing_prices
+    parsed_stock_data.print_drawdowns
+    parsed_stock_data.print_rate_of_return
   end
 
   def quandl_stock_time_data_url
