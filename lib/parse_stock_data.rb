@@ -6,10 +6,10 @@ class ParseStockData
   attr_reader :stock_data, :start_price, :start_date, :end_price, :end_date
   def initialize(stock_data)
     @stock_data = stock_data
-    @start_price = stock_data[stock_data.length - 1][4]
-    @start_date = stock_data[stock_data.length - 1][0]
-    @end_price = stock_data[0][4]
-    @end_date = stock_data[0][0]
+    @start_price = stock_data[0][4]
+    @start_date = stock_data[0][0]
+    @end_price = stock_data[stock_data.length - 1][4]
+    @end_date = stock_data[stock_data.length - 1][0]
   end
 
   def closing_prices
@@ -30,7 +30,7 @@ class ParseStockData
 
   def rate_of_return
     ror = (earnings) / start_price
-    puts "Return: #{earnings} [#{format_ror(ror)}%] (#{start_price} on #{format_date(start_date)} -> #{end_price} on #{format_date(end_date)})"
+    puts print_ror(earnings, ror)
   end
 
   private
@@ -64,10 +64,15 @@ class ParseStockData
   end
 
   def print_closing_data(price_data)
-    "#{format_date(price_data[0])}: Closed at #{price_data[4].round(2)}\n"
+    "#{format_date(price_data[0])}: Closed at #{price_data[4].round(2)} (#{price_data[3]} ~ #{price_data[2]})\n"
   end
 
   def print_drawdown_data(drawdown)
     "#{drawdown[:amount]}% (#{drawdown[:high_price]} on #{drawdown[:date]} -> #{drawdown[:low_price]} on #{drawdown[:date]})\n"
+  end
+
+  def print_ror(earnings, ror)
+    symbol = ror > 0 ? '+' : ''
+    "Return: #{earnings} [#{symbol}#{format_ror(ror)}%] (#{start_price} on #{format_date(start_date)} -> #{end_price} on #{format_date(end_date)})"
   end
 end
