@@ -2,7 +2,7 @@ require_relative 'fetch_stock_data'
 require_relative 'parse_stock_data'
 
 class Stock
-  attr_reader :args #, :api_key, :stock_symbol, :start_date, :end_date
+  attr_reader :args
 
   def initialize(args={})
     @args = args

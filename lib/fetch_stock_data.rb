@@ -30,7 +30,7 @@ class FetchStockData
   end
 
   def test_request
-    url = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json?column_index=4&start_date=2014-01-01&end_date=2014-12-31&api_key=#{api_key}"
+    url = "https://www.quandl.com/api/v3/datasets/WIKI/AAPL.json?column_index=4&start_date=2014-01-01&end_date=2014-12-31&api_key=#{TEST_API_KEY}"
     request(url)
   end
 
