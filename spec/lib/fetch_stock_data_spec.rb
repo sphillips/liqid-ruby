@@ -8,6 +8,7 @@ describe FetchStockData do
     end_date: '2018-01-05'
   }
   invalid_params = {}
+
   let(:test_fetch) { FetchStockData.new(valid_params) }
 
   describe 'when initializing' do
