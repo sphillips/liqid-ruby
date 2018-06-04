@@ -1,7 +1,9 @@
 require_relative 'helpers/dates_helper'
+require_relative 'helpers/numbers_helper'
 
 class ParseStockData
   include DatesHelper
+  include NumbersHelper
 
   attr_reader :stock_data, :start_price, :start_date, :end_price, :end_date
   def initialize(stock_data)
@@ -27,35 +29,32 @@ class ParseStockData
   end
 
   def print_rate_of_return
-    ror = (earnings) / start_price
+    ror = earnings / start_price
     format_ror_data(earnings, ror)
   end
 
   private
 
-  def format_ror_value(ror)
-    (ror * 100).round(1)
-  end
-
   def earnings
     end_price - start_price
   end
 
-  # calculate ROR value, format as percent and round to 1 decimal place
+  # calculate ROR value
   def calculate_rate(start_value, end_value)
     amount = (end_value - start_value) / start_value
     format_ror_value(amount)
   end
 
   # select first 3 records from data and calculate drawdown for each
-  def calculate_drawdowns
+  def calculate_drawdowns(num = 3)
     drawdowns = []
-    stock_data.first(3).each do |price_data|
+    stock_data.first(num).each do |price_data|
+      date = price_data[0]
       high = price_data[2]
       low = price_data[3]
       drawdowns << {
                      amount: calculate_rate(high, low),
-                     date: format_date(price_data[0]),
+                     date: format_date(date),
                      high_price: high,
                      low_price: low
                    }
@@ -63,7 +62,9 @@ class ParseStockData
     drawdowns
   end
 
-  # methods to format data for printing to stdout
+  ###
+  # Methods to format data for printing to stdout
+  ###
 
   def format_closing_data(price_data)
     "#{format_date(price_data[0])}: Closed at #{price_data[4].round(2)} (#{price_data[3]} ~ #{price_data[2]})\n"
