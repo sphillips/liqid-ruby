@@ -29,7 +29,6 @@ class ParseStockData
   end
 
   def print_rate_of_return
-    ror = earnings / start_price
     format_ror_data(earnings, ror)
   end
 
@@ -39,10 +38,8 @@ class ParseStockData
     end_price - start_price
   end
 
-  # calculate ROR value
-  def calculate_rate(start_value, end_value)
-    amount = (end_value - start_value) / start_value
-    format_pct_value(amount)
+  def ror
+    calculate_ror(start_price, end_price)
   end
 
   # select first 3 records from data and calculate drawdown for each
@@ -52,8 +49,10 @@ class ParseStockData
       date = price_data[0]
       high = price_data[2]
       low = price_data[3]
+      drawdown_amount = calculate_drawdown(high, low)
+
       drawdowns << {
-                     amount: calculate_rate(high, low),
+                     amount: format_pct_value(drawdown_amount),
                      date: format_date(date),
                      high_price: high,
                      low_price: low
