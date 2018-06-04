@@ -42,7 +42,7 @@ class ParseStockData
   # calculate ROR value
   def calculate_rate(start_value, end_value)
     amount = (end_value - start_value) / start_value
-    format_ror_value(amount)
+    format_pct_value(amount)
   end
 
   # select first 3 records from data and calculate drawdown for each
@@ -76,6 +76,6 @@ class ParseStockData
 
   def format_ror_data(earnings, ror)
     symbol = ror > 0 ? '+' : ''
-    "Return: #{earnings} [#{symbol}#{format_ror_value(ror)}%] (#{start_price} on #{format_date(start_date)} -> #{end_price} on #{format_date(end_date)})"
+    "Return: #{earnings} [#{symbol}#{format_pct_value(ror)}%] (#{start_price} on #{format_date(start_date)} -> #{end_price} on #{format_date(end_date)})"
   end
 end
