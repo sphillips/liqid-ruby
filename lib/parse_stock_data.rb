@@ -42,7 +42,7 @@ class ParseStockData
     calculate_ror(start_price, end_price)
   end
 
-  # select first 3 records from data and calculate drawdown for each
+  # select first n records from data and calculate drawdown for each
   def calculate_drawdowns(num = 3)
     drawdowns = []
     stock_data.first(num).each do |price_data|
