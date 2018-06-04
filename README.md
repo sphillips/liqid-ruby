@@ -28,6 +28,9 @@ $ rspec
 
 The [VCR](https://github.com/vcr/vcr) gem is used to record the API response and speed up the test suite.
 
+## Todos
+In order for this script to handle large data sets or a high volume of API requests, my first suggestion would be to move the data processing and output of `stock.rb` into a message queue like [Resque](https://github.com/resque/resque). This enables many requests to be handled at once without awaiting the API response and also gives the operations team the ability to scale worker processes as needed. Also a necessary consideration would be to configure some type of error handling to prepare for the eventuality that the API rate limit is hit.
+
 ## Requirements
 - The application should get following inputs
   - A stock symbol e.g. “AAPL”
