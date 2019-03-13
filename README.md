@@ -1,4 +1,3 @@
-# Liqid Coding Challenge
 ## To Run Example
 Run the `fetch_stock.rb` script from the command line in the root folder, providing your API key as an ENV variable. If no API key is provided, the script will default to a test key:
 
