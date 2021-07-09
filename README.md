@@ -24,25 +24,3 @@ Simply run the `rspec` command from the root folder:
 ```
 $ rspec
 ```
-
-The [VCR](https://github.com/vcr/vcr) gem is used to record the API response and speed up the test suite.
-
-## Todos
-In order for this script to handle large data sets or a high volume of API requests, my first suggestion would be to move the data processing and output of `stock.rb` into a message queue like [Resque](https://github.com/resque/resque). This enables many requests to be handled at once without awaiting the API response and also gives the operations team the ability to scale worker processes as needed. Also a necessary consideration would be to configure some type of error handling to prepare for the eventuality that the API rate limit is hit.
-
-## Requirements
-- The application should get following inputs
-  - A stock symbol e.g. “AAPL”
-  - Start date or range of date
-  - API key for getting stock prices
-- Calculate the return the stock has generated since the start date to today / any date as
-well as the maximum drawdown of the stock within that time frame.
-  - Formula for the rate of return:
-https://en.wikipedia.org/wiki/Rate_of_return#Return
-  - About maximum drawdown: https://ycharts.com/glossary/terms/max_drawdown
-- The application should print following information on the command line.
-  - Stock prices on the given date / during the time frame
-  - Return the stock has generated
-  - Maximum drawdown
-- BONUS: Set up a trigger to send the output to users via email, Slack or any other
-notification service you want to use. Make sure it comes with a nice template.
